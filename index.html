@@ -42,22 +42,29 @@
       margin: 0.25rem 0 0;
       color: var(--subtext);
     }
-    .linktree-btn {
+    .nav-links {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .nav-btn {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      background: #25824e;
-      color: #fff;
-      padding: 0.5rem 1rem;
+      gap: 0.4rem;
+      padding: 0.5rem 0.85rem;
       border-radius: 6px;
       text-decoration: none;
       font-weight: 600;
-      font-size: 0.9rem;
-      transition: background 0.2s ease;
+      font-size: 0.85rem;
+      transition: opacity 0.2s ease;
     }
-    .linktree-btn:hover {
-      background: #1e6b3f;
+    .nav-btn:hover {
+      opacity: 0.85;
     }
+    .btn-linktree { background: #25824e; color: #fff; }
+    .btn-cashapp  { background: #00D632; color: #000; }
+    .btn-venmo    { background: #008CFF; color: #fff; }
+
     article {
       background: var(--card);
       padding: 2rem;
@@ -99,6 +106,18 @@
     .content-link:hover {
       color: #fff;
     }
+    .support-box {
+      margin-top: 2rem;
+      padding-top: 1.25rem;
+      border-top: 1px dashed var(--border);
+    }
+    .support-box h4 {
+      margin: 0 0 0.75rem 0;
+      color: #fff;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
     .comments-section {
       margin-top: 3rem;
       padding-top: 1.5rem;
@@ -117,9 +136,17 @@
       <h1>CitxenX</h1>
       <p>Fiction, Poetry & Visual Art</p>
     </div>
-    <a href="https://linktr.ee/citixenX" target="_blank" rel="noopener noreferrer" class="linktree-btn">
-      🌳 Connect on Linktree
-    </a>
+    <nav class="nav-links">
+      <a href="https://linktr.ee/citixenX" target="_blank" rel="noopener noreferrer" class="nav-btn btn-linktree">
+        🌳 Linktree
+      </a>
+      <a href="https://cash.app/$NateWants2Battle" target="_blank" rel="noopener noreferrer" class="nav-btn btn-cashapp">
+        $ Cash App
+      </a>
+      <a href="https://account.venmo.com/u/NateWants2Battle" target="_blank" rel="noopener noreferrer" class="nav-btn btn-venmo">
+        v Venmo
+      </a>
+    </nav>
   </header>
 
   <main>
@@ -146,6 +173,19 @@
         <p>I hope to share some phenomenal poems, stories, and other works with you!</p>
         
         <p>Feel free to leave a comment below!</p>
+      </div>
+
+      <!-- Support / Tip Section -->
+      <div class="support-box">
+        <h4>Support the Work</h4>
+        <div class="nav-links">
+          <a href="https://cash.app/$NateWants2Battle" target="_blank" rel="noopener noreferrer" class="nav-btn btn-cashapp">
+            $ Cash App ($NateWants2Battle)
+          </a>
+          <a href="https://account.venmo.com/u/NateWants2Battle" target="_blank" rel="noopener noreferrer" class="nav-btn btn-venmo">
+            v Venmo (@NateWants2Battle)
+          </a>
+        </div>
       </div>
     </article>
 
