@@ -1,11 +1,143 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>Hello World</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hello World | CitxenX</title>
+  <style>
+    :root {
+      --bg: #121212;
+      --card: #1e1e1e;
+      --accent: #00b4d8;
+      --text: #e0e0e0;
+      --subtext: #a0a0a0;
+      --border: #333;
+    }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+      line-height: 1.6;
+    }
+    header {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    header h1 {
+      margin: 0;
+      color: #fff;
+      font-size: 2rem;
+      letter-spacing: -0.02em;
+    }
+    header p {
+      margin: 0.25rem 0 0;
+      color: var(--subtext);
+    }
+    article {
+      background: var(--card);
+      padding: 2rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      margin-bottom: 2.5rem;
+    }
+    .post-title {
+      margin-top: 0;
+      color: #fff;
+      font-size: 1.75rem;
+    }
+    .post-date {
+      font-size: 0.85rem;
+      color: var(--subtext);
+      margin-bottom: 1.5rem;
+    }
+    .status-board {
+      background: rgba(0, 0, 0, 0.25);
+      border-left: 3px solid var(--accent);
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.95rem;
+    }
+    .status-board p {
+      margin: 0.4rem 0;
+    }
+    .status-board strong {
+      color: var(--accent);
+    }
+    .post-content p {
+      margin-bottom: 1.25rem;
+    }
+    .comments-section {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .comments-section h3 {
+      color: #fff;
+      margin-bottom: 1.5rem;
+    }
+  </style>
 </head>
-  <body>
+<body>
 
-<h1>Hello World</h1>
-<p>Hello World</p>
+  <header>
+    <h1>CitxenX</h1>
+    <p>Fiction, Poetry & Visual Art</p>
+  </header>
+
+  <main>
+    <article>
+      <h2 class="post-title">Hello World</h2>
+      <div class="post-date">August 9, 2026</div>
+
+      <!-- Current Status Log -->
+      <div class="status-board">
+        <p><strong>Current Viewings:</strong> The Righteous Gemstones (Season 3, in progress), Sarah Jane Adventures (Series 4, in progress), Avatar: The Legend of Korra Rewatch (Book One: Air, in progress), Doctor Who (Series 5, complete).</p>
+        <p><strong>Music:</strong> Eiffel 65 – “Contact!” (2001), Scraping Foetus Off the Wheel – “Nail” (1995)</p>
+        <p><strong>Games:</strong> 8-bit Atari Bliss! (plus helping my partner with Persona 4 Golden)</p>
+        <p><strong>Flavors:</strong> Lowfat vanilla Greek yogurt with fresh strawberries; diner-style coffee brewed in a pour-over carafe, served in an 80s/90s Corelle mug for that extra warmth.</p>
+      </div>
+
+      <!-- Body Content -->
+      <div class="post-content">
+        <p>Hello!</p>
+        
+        <p>I decided to take a slightly different approach to my creative work. For those who haven’t met me yet, I’m an independent fiction writer, poet, and visual artist. I’ve decided to use GitHub as a platform to showcase my work and provide readers with updates, samples, and various other pieces of content you can’t find on my other platforms.</p>
+        
+        <p>My prose tends to be concentrated in science fiction, fantasy, and mystery—so if that’s your thing, I highly encourage you to keep in touch and engage with my work. I’ll also be including my Linktree so you can connect with me on social media. You can follow my Facebook page, where I’ll share memes, muses, and intrusive thoughts; my Instagram to see my artwork and get a glimpse into my ordinary life; and my Spotify profile to see where my brain goes musically.</p>
+        
+        <p>I hope to share some phenomenal poems, stories, and other works with you!</p>
+        
+        <p>Feel free to leave a comment below!</p>
+      </div>
+    </article>
+
+    <!-- Comments Section -->
+    <section class="comments-section">
+      <h3>Comments</h3>
+      
+      <!-- Giscus Script Target -->
+      <script src="https://giscus.app/client.js"
+              data-repo="citixenx/citixenx.github.io"
+              data-repo-id="[YOUR-REPO-ID]"
+              data-category="Announcements"
+              data-category-id="[YOUR-CATEGORY-ID]"
+              data-mapping="pathname"
+              data-strict="0"
+              data-reactions-enabled="1"
+              data-emit-metadata="0"
+              data-input-position="bottom"
+              data-theme="dark"
+              data-lang="en"
+              crossorigin="anonymous"
+              async>
+      </script>
+    </section>
+  </main>
 
 </body>
 </html>
