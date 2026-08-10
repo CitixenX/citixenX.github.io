@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quick Dashboard</title>
+  <style>
+    :root {
+      --bg-color: #0f172a;
+      --card-bg: #1e293b;
+      --accent: #38bdf8;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: #334155;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg-color: #f8fafc;
+        --card-bg: #ffffff;
+        --accent: #0284c7;
+        --text: #0f172a;
+        --text-muted: #64748b;
+        --border: #e2e8f0;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 1.5rem;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 500px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .header {
+      text-align: center;
+    }
+
+    .header h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    /* DuckDuckGo Search Form */
+    .search-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.5rem 0.75rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+
+    .search-form {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .search-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      color: var(--text);
+      padding: 0.5rem;
+    }
+
+    .search-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .search-button {
+      background: var(--accent);
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .search-button:hover {
+      opacity: 0.9;
+    }
+
+    /* Quick Links Grid */
+    .links-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .link-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.25rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .link-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+      box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.1);
+    }
+
+    .link-title {
+      font-size: 1.05rem;
+    }
+
+    .link-url {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- DuckDuckGo Search -->
+    <div class="search-box">
+      <form class="search-form" method="get" action="https://duckduckgo.com/">
+        <input 
+          class="search-input" 
+          type="text" 
+          name="q" 
+          placeholder="Search DuckDuckGo..." 
+          autofocus 
+          required 
+        />
+        <button class="search-button" type="submit">Search</button>
+      </form>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="links-grid">
+      <a class="link-card" href="https://m.wikipedia.org" target="_blank" rel="noopener">
+        <span class="link-title">Wikipedia</span>
+        <span class="link-url">m.wikipedia.org</span>
+      </a>
+
+      <a class="link-card" href="https://old.reddit.com" target="_blank" rel="noopener">
+        <span class="link-title">Reddit (Old)</span>
+        <span class="link-url">old.reddit.com</span>
+      </a>
+
+      <a class="link-card" href="https://thin.npr.org" target="_blank" rel="noopener">
+        <span class="link-title">NPR Text-Only</span>
+        <span class="link-url">thin.npr.org</span>
+      </a>
+
+      <a class="link-card" href="https://www.fastweather.com/index?place=Lexington_KY_US" target="_blank" rel="noopener">
+        <span class="link-title">Fast Weather</span>
+        <span class="link-url">Lexington, KY</span>
+      </a>
+    </div>
+
+  </div>
+
+</body>
+</html>
