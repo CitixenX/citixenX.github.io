@@ -50,17 +50,7 @@
       gap: 1.5rem;
     }
 
-    .header {
-      text-align: center;
-    }
-
-    .header h1 {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    /* DuckDuckGo Search Form */
+    /* Lightweight DuckDuckGo Form */
     .search-box {
       background: var(--card-bg);
       border: 1px solid var(--border);
@@ -144,14 +134,14 @@
 
   <div class="container">
     
-    <!-- DuckDuckGo Search -->
+    <!-- Lightweight DuckDuckGo Search (Non-JS HTML Version) -->
     <div class="search-box">
-      <form class="search-form" method="get" action="https://duckduckgo.com/">
+      <form class="search-form" method="get" action="https://html.duckduckgo.com/html/">
         <input 
           class="search-input" 
           type="text" 
           name="q" 
-          placeholder="Search DuckDuckGo..." 
+          placeholder="Search DDG (Lite)..." 
           autofocus 
           required 
         />
@@ -176,9 +166,9 @@
         <span class="link-url">thin.npr.org</span>
       </a>
 
-      <a class="link-card" href="https://www.fastweather.com/index?place=Lexington_KY_US" target="_blank" rel="noopener">
-        <span class="link-title">Fast Weather</span>
-        <span class="link-url">Lexington, KY</span>
+      <a class="link-card" href="https://forecast.weather.gov/MapClick.php?lat=38.05&lon=-84.46" target="_blank" rel="noopener">
+        <span class="link-title">NWS Weather</span>
+        <span class="link-url">Lexington (NWS)</span>
       </a>
     </div>
 
