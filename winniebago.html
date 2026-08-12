@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quick Dashboard</title>
+  <title>Winniebago -- Portable Dashboard</title>
   <style>
     :root {
       --bg-color: #0f172a;
@@ -48,6 +48,27 @@
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
+      text-align: center;
+    }
+
+    /* Header & Branding */
+    .brand-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-logo {
+      width: 200px;
+      height: auto;
+    }
+
+    .brand-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.025em;
     }
 
     /* Lightweight DuckDuckGo Form */
@@ -86,7 +107,6 @@
       padding: 0.5rem 1rem;
       font-weight: 600;
       cursor: pointer;
-      transition: opacity 0.2s;
     }
 
     .search-button:hover {
@@ -107,17 +127,15 @@
       padding: 1rem 1.25rem;
       background: var(--card-bg);
       border: 1px solid var(--border);
+      border-ricdius: 12px;
       border-radius: 12px;
       color: var(--text);
       text-decoration: none;
       font-weight: 500;
-      transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
     }
 
     .link-card:hover {
-      transform: translateY(-2px);
       border-color: var(--accent);
-      box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.1);
     }
 
     .link-title {
@@ -134,8 +152,13 @@
 
   <div class="container">
     
+    <!-- Header with 200px Graphic and Title -->
+    <div class="brand-header">
+      <img src="CitizenXmini.png" alt="Winniebago Graphic" class="brand-logo" width="200">
+      <h1 class="brand-title">Winniebago -- Portable Dashboard</h1>
+    </div>
+
     <!-- Lightweight DuckDuckGo Search (Non-JS HTML Version) -->
-    <center>
     <div class="search-box">
       <form class="search-form" method="get" action="https://html.duckduckgo.com/html/">
         <input 
@@ -149,10 +172,8 @@
         <button class="search-button" type="submit">Search</button>
       </form>
     </div>
-</center>
     
     <!-- Quick Links -->
-    <center>
     <div class="links-grid">
       <a class="link-card" href="https://m.wikipedia.org" target="_blank" rel="noopener">
         <span class="link-title">Wikipedia</span>
@@ -172,13 +193,14 @@
       <a class="link-card" href="https://forecast.weather.gov/" target="_blank" rel="noopener">
         <span class="link-title">NWS Weather</span>
         <span class="link-url">Weather Forecasts | USA</span>
+      </a>
 
       <a class="link-card" href="https://forecast.weather.gov/MapClick.php?lat=38.05&lon=-84.46" target="_blank" rel="noopener">
         <span class="link-title">NWS Weather</span>
         <span class="link-url">Lexington (NWS)</span>
       </a>
     </div>
-</center>
+
   </div>
 
 </body>
