@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seventh of November — CitixenX</title>
+  <style>
+    :root {
+      --bg: #121212;
+      --card: #1e1e1e;
+      --accent: #00b4d8;
+      --text: #e0e0e0;
+      --subtext: #a0a0a0;
+      --border: #333;
+    }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+      line-height: 1.6;
+    }
+    header {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.25rem;
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .header-brand h1 {
+      margin: 0;
+      color: #fff;
+      font-size: 2rem;
+      letter-spacing: -0.02em;
+    }
+    .header-brand h1 a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .header-brand p {
+      margin: 0.25rem 0 0;
+      color: var(--subtext);
+    }
+    .nav-links {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 0.85rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: opacity 0.2s ease;
+    }
+    .nav-btn:hover {
+      opacity: 0.85;
+    }
+    .btn-nav        { background: #333; color: #fff; }
+    .btn-discussions { background: #238636; color: #fff; }
+    .btn-linktree    { background: #25824e; color: #fff; }
+    .btn-email       { background: #6f42c1; color: #fff; }
+    .btn-cashapp     { background: #00D632; color: #000; }
+    .btn-venmo       { background: #008CFF; color: #fff; }
+
+    article {
+      background: var(--card);
+      padding: 2.5rem 2rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      margin-bottom: 2.5rem;
+    }
+    .poem-header {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1rem;
+      margin-bottom: 2rem;
+    }
+    .poem-title {
+      margin: 0;
+      color: #fff;
+      font-size: 2rem;
+    }
+    .poem-meta {
+      font-size: 0.85rem;
+      color: var(--subtext);
+      margin-top: 0.5rem;
+    }
+    
+    .poem-body {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 1.15rem;
+      line-height: 1.85;
+      color: #f0f0f0;
+      white-space: pre-wrap;
+      letter-spacing: 0.01em;
+    }
+
+    .support-box {
+      margin-top: 3rem;
+      padding-top: 1.25rem;
+      border-top: 1px dashed var(--border);
+    }
+    .support-box h4 {
+      margin: 0 0 0.75rem 0;
+      color: #fff;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .comments-section {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .comments-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+    .comments-header h3 {
+      color: #fff;
+      margin: 0;
+    }
+  </style>
+  <!-- Favicons -->
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="shortcut icon" href="favicon.ico">
+<link rel="manifest" href="site.webmanifest">
+</head>
+<body>
+
+  <header>
+    <div class="header-brand">
+      <h1><a href="index.html">CitixenX</a></h1>
+      <p>Fiction, Poetry & Visual Art</p>
+    </div>
+    <nav class="nav-links">
+      <a href="index.html" class="nav-btn btn-nav">🏠 Home</a>
+      <a href="works.html" class="nav-btn btn-nav">📚 Works</a>
+      <a href="about.html" class="nav-btn btn-nav">👤 About</a>
+      <a href="https://github.com/citixenx/citixenx.github.io/discussions" target="_blank" rel="noopener noreferrer" class="nav-btn btn-discussions">💬 Discussions</a>
+      <a href="https://linktr.ee/citixenX" target="_blank" rel="noopener noreferrer" class="nav-btn btn-linktree">🌳 Linktree</a>
+      <a href="mailto:nate@citixenX.org" class="nav-btn btn-email">✉️ Email</a>
+      <a href="https://cash.app/$NateWants2Battle" target="_blank" rel="noopener noreferrer" class="nav-btn btn-cashapp">$ Cash App</a>
+      <a href="https://account.venmo.com/u/NateWants2Battle" target="_blank" rel="noopener noreferrer" class="nav-btn btn-venmo">v Venmo</a>
+    </nav>
+  </header>
+
+  <main>
+    <article>
+      <header class="poem-header">
+        <h2 class="poem-title">A Reflection on Grief</h2>
+        <div class="poem-meta">By CitixenX • Published: October 6, 2026</div>
+      </header>
+
+      <div class="poem-body">A decade ago, the world changed.
+Grief is a funny word.
+What was once just online gaming jargon to me for annoying behavior would later grow into a concept I identified with across much of my life.
+It’s strange the way grief appears: a former best friend, a close loved one, an ex-lover. It comes in so many colors it’s practically “like a rainbow,” as Mick Jagger might say.
+Sometimes it’s easy...like accepting how eccentric a relative was. You remember planning to introduce your soon-to-be fiancée to them, even warning her ahead of time: <i>“Now, this guy is incredibly off the rails. I’m pretty sure he’s been tuned to Fox News for the last decade, so please don’t take him too seriously.”</i> Only to learn that very relative, along with another loved one, passed away that same year, culminating in the cancellation of the trip altogether.
+Other times, it takes months of self-reflection, reevaluation, and trauma reconciliation to realize that someone you were ready to dedicate your life to was never truly worth your time. You discover that the love you were actually searching for could never be tied down to such a finite label. Instead, it’s exemplified by the way you look at your partner and admire them for exactly who they are. Loving them is like loving the stars themselves -- as a fictional time traveler once put it, you don't expect a sunset to admire you back. It doesn’t matter where they are or what they’re doing; the simple fact that you get to share a world with them is all you need.
+Then there’s the grief you think you’ve forgotten: the daily misfortunes, the annoyances, the quiet struggles. A broken bumper that becomes the proverbial nail in the coffin for your clunktastic commuter. The times you reflect on a former employer expecting you to mark up a $125 washing machine to $400, or the time they sent you right back to work immediately following a medical emergency without ever calling EMS. The everyday friction points of living.
+And finally, there’s the grief that stays with you...a persistent, quiet sense of loss. It catches you off guard when you walk into a Dairy Queen for lunch, run into the nearest Walmart for essentials, or ask a stranger for directions. Regardless of your own belief system, you can still hear her voice in your head: <i>“Jesus’s light shines right through ya,”</i> <i>“Pray for me while you’re down there,”</i> or <i>“You’re a great John the Baptist pointing the way.”</i> You remember the sheer joy and jubilance she brought to everyone around her.
+Even when the rest of the family was hard on you or made you feel invisible, you always mattered to her. As a guy in his mid-20s trying to finish an undergrad degree just to check off a box on a family checklist, it was hard to articulate at the time standing by her bedside while she clung to her last few moments of lucidity. But deep down, I know she knew how much she mattered to me. To this day, I keep her trinkets close. Digging through my odds and ends, I’ll stumble across the "3D Jesus" or the "Hallelujah clock," and every single time, I can't help but smile.
+Grief, much like the word itself, is multidimensional. It is complex, deeply layered, and never touches two people quite the same way.
+</div>
+
+      <!-- Support / Contact Section -->
+      <div class="support-box">
+        <h4>Support & Contact</h4>
+        <div class="nav-links">
+          <a href="mailto:nate@citixenX.org" class="nav-btn btn-email">✉️ Email (nate@citixenX.org)</a>
+          <a href="https://cash.app/$NateWants2Battle" target="_blank" rel="noopener noreferrer" class="nav-btn btn-cashapp">$ Cash App ($NateWants2Battle)</a>
+          <a href="https://account.venmo.com/u/NateWants2Battle" target="_blank" rel="noopener noreferrer" class="nav-btn btn-venmo">v Venmo (@NateWants2Battle)</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Comments Section -->
+    <section class="comments-section">
+      <div class="comments-header">
+        <h3>Discussions & Comments</h3>
+        <a href="https://github.com/citixenx/citixenx.github.io/discussions" target="_blank" rel="noopener noreferrer" class="nav-btn btn-discussions">
+          View on GitHub Discussions ↗
+        </a>
+      </div>
+      
+      <script src="https://giscus.app/client.js"
+              data-repo="citixenx/citixenx.github.io"
+              data-repo-id="R_kgDOTzUHMg"
+              data-category="General"
+              data-category-id="[YOUR-CATEGORY-ID]"
+              data-mapping="pathname"
+              data-strict="0"
+              data-reactions-enabled="1"
+              data-emit-metadata="0"
+              data-input-position="bottom"
+              data-theme="dark"
+              data-lang="en"
+              crossorigin="anonymous"
+              async>
+      </script>
+    </section>
+  </main>
+
+</body>
+</html>
