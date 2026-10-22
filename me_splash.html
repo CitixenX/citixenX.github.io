@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>me.citixenx.org // Remote Web Portal</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- LOCAL NETWORK DETECTION & REDIRECT SCRIPT -->
+    <script>
+        (function detectLocalNetwork() {
+            const HOME_SUBNET = "192.168.1.";
+            const LOCAL_PORTAL = "http://192.168.1.179:8080/local.html";
+
+            try {
+                const pc = new RTCPeerConnection({ iceServers: [] });
+                pc.createDataChannel("");
+                
+                pc.onicecandidate = (event) => {
+                    if (!event || !event.candidate) return;
+                    const candidate = event.candidate.candidate;
+                    const ipMatch = candidate.match(/([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/);
+                    if (ipMatch) {
+                        const clientIP = ipMatch[1];
+                        if (clientIP.startsWith(HOME_SUBNET)) {
+                            pc.close();
+                            window.location.replace(LOCAL_PORTAL);
+                        }
+                    }
+                };
+
+                pc.createOffer().then((offer) => pc.setLocalDescription(offer)).catch(() => {});
+            } catch(e) {
+                // Ignore if WebRTC is restricted
+            }
+        })();
+    </script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#090d16',
+                        cardBg: '#131b2e',
+                        borderClr: '#233048'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #090d16;
+            color: #f1f5f9;
+            font-family: 'Inter', sans-serif;
+        }
+        .portal-border {
+            border: 1px solid #233048;
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.6);
+        }
+        .portal-card {
+            transition: all 0.2s ease-in-out;
+        }
+        .portal-card:hover {
+            transform: translateY(-2px);
+            border-color: #3b82f6;
+            box-shadow: 0 8px 25px -5px rgba(59, 130, 246, 0.25);
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #090d16;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #233048;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="min-h-screen p-4 md:p-8 flex flex-col justify-between">
+
+    <!-- MAIN CONTAINER -->
+    <div class="max-w-[1400px] mx-auto w-full space-y-6">
+
+        <!-- ================= TOP SECTION / HEADER ================= -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
+            
+            <!-- LEFT / CENTER MAIN HEADER: GREETING & DOMAIN STATUS -->
+            <div class="lg:col-span-8 bg-cardBg/90 rounded-2xl p-6 portal-border flex flex-col justify-between relative overflow-hidden">
+                <div class="absolute -right-8 -bottom-8 text-slate-800/20 text-9xl font-mono pointer-events-none">
+                    <i class="fa-solid fa-globe"></i>
+                </div>
+
+                <div>
+                    <!-- DYNAMIC TIME-BASED GREETING -->
+                    <h1 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-2" id="greeting-display">
+                        Good Morning
+                    </h1>
+
+                    <!-- DOMAIN NAME & ONLINE STATUS -->
+                    <div class="flex flex-wrap items-center gap-3 font-mono text-sm">
+                        <span class="text-blue-400 font-bold text-base tracking-wide">me.citixenx.org</span>
+                        <span class="text-slate-500">&bull;</span>
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-bold">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> ONLINE
+                        </span>
+                        <span class="text-slate-500">&bull;</span>
+                        <span class="text-slate-400 text-xs">PORTAL: <strong class="text-amber-400">REMOTE GATEWAY</strong></span>
+                    </div>
+                </div>
+
+                <!-- DUCK SEARCH BAR (CENTERED IN SKETCH) -->
+                <div class="mt-6">
+                    <form action="https://duckduckgo.com/" method="GET" target="_blank" class="flex flex-col sm:flex-row gap-2">
+                        <div class="relative flex-grow">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </div>
+                            <input type="text" name="q" placeholder="Duck Search..." required
+                                class="w-full pl-11 pr-4 py-3.5 bg-slate-900/90 border border-slate-700/80 rounded-xl text-slate-100 placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 font-sans text-base transition-all">
+                        </div>
+                        <button type="submit" 
+                            class="px-7 py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-mono font-medium rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-blue-600/20">
+                            <span>SEARCH</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- RIGHT WIDGET: LIVE FORECAST BOX (NWS API INTEGRATED) -->
+            <div class="lg:col-span-4 bg-cardBg/90 rounded-2xl p-6 portal-border flex flex-col justify-between">
+                <div class="flex items-center justify-between border-b border-slate-700/60 pb-3 mb-3">
+                    <span class="text-xs font-mono uppercase tracking-wider text-slate-400 flex items-center gap-2">
+                        <i class="fa-solid fa-cloud-sun text-amber-400" id="weather-icon"></i> Forecast
+                    </span>
+                    <span class="text-xs font-mono text-slate-400" id="weather-source">NWS Live</span>
+                </div>
+
+                <div class="flex items-center justify-between my-2">
+                    <div class="flex items-center gap-4">
+                        <i class="fa-solid fa-sun text-amber-400 text-4xl" id="weather-main-icon"></i>
+                        <div>
+                            <div class="text-3xl font-bold font-mono" id="weather-temp">--°F</div>
+                            <div class="text-xs text-slate-400 font-medium" id="weather-desc">Lexington, KY</div>
+                        </div>
+                    </div>
+                    <div class="text-right text-xs font-mono text-slate-400 space-y-1">
+                        <div>High: <span class="text-slate-200" id="weather-high">--°</span></div>
+                        <div>Low: <span class="text-slate-200" id="weather-low">--°</span></div>
+                    </div>
+                </div>
+
+                <div class="mt-2 bg-slate-900/80 p-3 rounded-xl border border-slate-800/80 flex items-center justify-between text-xs font-mono text-slate-300">
+                    <span class="truncate"><i class="fa-solid fa-droplet text-blue-400 mr-1.5"></i> Precip: <span id="weather-precip">--%</span></span>
+                    <span class="text-slate-400">Humidity: <span id="weather-humidity">--%</span></span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ================= MAIN CONTENT GRID (PC & MOBILE REFLOW) ================= -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+
+            <!-- LEFT/CENTER 6-TILE QUICK LINK GRID (SKETCH CENTER) -->
+            <div class="lg:col-span-8">
+                <h2 class="text-xs font-mono uppercase tracking-widest text-slate-400 mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-compass text-blue-400"></i> Essential Web Destinations
+                </h2>
+
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                    <!-- Wiki (Updated with Book Emoji) -->
+                    <a href="https://wikipedia.org" target="_blank" class="bg-cardBg p-5 rounded-2xl portal-border portal-card flex flex-col items-center justify-center text-center group min-h-[120px]">
+                        <div class="w-12 h-12 rounded-xl bg-slate-900 border border-slate-700/80 text-slate-200 flex items-center justify-center mb-2 group-hover:border-blue-400 group-hover:text-blue-400 transition-all text-2xl">
+                            📖
+                        </div>
+                        <span class="font-bold text-sm text-slate-200 group-hover:text-blue-400 transition-colors">Wiki</span>
+                    </a>
+
+                    <!-- YT -->
+                    <a href="https://youtube.com" target="_blank" class="bg-cardBg p-5 rounded-2xl portal-border portal-card flex flex-col items-center justify-center text-center group min-h-[120px]">
+                        <div class="w-12 h-12 rounded-xl bg-slate-900 border border-slate-700/80 text-slate-200 flex items-center justify-center mb-2 group-hover:border-red-500 group-hover:text-red-500 transition-all">
+                            <i class="fa-brands fa-youtube text-2xl"></i>
+                        </div>
+                        <span class="font-bold text-sm text-slate-200 group-hover:text-red-500 transition-colors">YT</span>
+                    </a>
+
+                    <!-- Reddit -->
+                    <a href="https://reddit.com" target="_blank" class="bg-cardBg p-5 rounded-2xl portal-border portal-card flex flex-col items-center justify-center text-center group min-h-[120px]">
+                        <div class="w-12 h-12 rounded-xl bg-slate-900 border border-slate-700/80 text-slate-200 flex items-center justify-center mb-2 group-hover:border-orange-500 group-hover:text-orange-500 transition-all">
+                            <i class="fa-brands fa-reddit-alien text-2xl"></i>
+                        </div>
+                        <span class="font-bold text-sm text-slate-200 group-hover:text-orange-500 transition-colors">Reddit</span>
+                    </a>
+
+                    <!-- FB -->
+                    <a href="https://facebook.com" target="_blank" class="bg-cardBg p-5 rounded-2xl portal-border portal-card flex flex-col items-center justify-center text-center group min-h-[120px]">
+                        <div class="w-12 h-12 rounded-xl bg-slate-900 border border-slate-700/80 text-slate-200 flex items-center justify-center mb-2 group-hover:border-blue-600 group-hover:text-blue-600 transition-all">
+                            <i class="fa-brands fa-facebook-f text-xl"></i>
+                        </div>
+                        <span class="font-bold text-sm text-slate-200 group-hover:text-blue-600 transition-colors">FB</span>
+                    </a>
+
+                    <!-- NPR -->
+                    <a href="https://npr.org" target="_blank" class="bg-cardBg p-5 rounded-2xl portal-border portal-card flex flex-col items-center justify-center text-center group min-h-[120px]">
+                        <div class="w-12 h-12 rounded-xl bg-slate-900 border border-slate-700/80 text-slate-200 flex items-center justify-center mb-2 group-hover:border-sky-400 group-hover:text-sky-400 transition-all">
+                            <i class="fa-solid fa-radio text-xl"></i>
+                        </div>
+                        <span class="font-bold text-sm text-slate-200 group-hover:text-sky-400 transition-colors">NPR</span>
+                    </a>
+
+                    <!-- AMZ -->
+                    <a href="https://amazon.com" target="_blank" class="bg-cardBg p-5 rounded-2xl portal-border portal-card flex flex-col items-center justify-center text-center group min-h-[120px]">
+                        <div class="w-12 h-12 rounded-xl bg-slate-900 border border-slate-700/80 text-slate-200 flex items-center justify-center mb-2 group-hover:border-amber-500 group-hover:text-amber-500 transition-all">
+                            <i class="fa-brands fa-amazon text-2xl"></i>
+                        </div>
+                        <span class="font-bold text-sm text-slate-200 group-hover:text-amber-500 transition-colors">AMZ</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: TAILSCALE REMOTE APPS & ARCHIVE (SKETCH RIGHT SIDE) -->
+            <div class="lg:col-span-4 space-y-4">
+                <h2 class="text-xs font-mono uppercase tracking-widest text-slate-400 flex items-center gap-2">
+                    <i class="fa-solid fa-network-wired text-purple-400"></i> Remote Server & Archive
+                </h2>
+
+                <!-- Audiobookshelf via Tailscale -->
+                <a href="http://100.85.37.12:13378" target="_blank"
+                   class="bg-cardBg p-5 rounded-2xl portal-border portal-card flex items-center gap-4 group block">
+                    <div class="w-14 h-14 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                        <i class="fa-solid fa-lines-leaning text-2xl"></i>
+                    </div>
+                    <div class="flex-grow">
+                        <div class="font-bold text-base text-slate-100 group-hover:text-purple-400 transition-colors">Audiobookshelf</div>
+                        <div class="text-xs font-mono text-purple-400/90 mt-0.5">WebApp via Tailscale</div>
+                        <div class="text-[11px] text-slate-500 font-mono mt-1">StrawHat-MGM Sync</div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-slate-600 group-hover:text-purple-400 transition-colors"></i>
+                </a>
+
+                <!-- Internet Archive -->
+                <a href="https://archive.org" target="_blank" 
+                   class="bg-cardBg p-5 rounded-2xl portal-border portal-card flex items-center gap-4 group block">
+                    <div class="w-14 h-14 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                        <i class="fa-solid fa-building-columns text-2xl"></i>
+                    </div>
+                    <div class="flex-grow">
+                        <div class="font-bold text-base text-slate-100 group-hover:text-amber-400 transition-colors">Archive</div>
+                        <div class="text-xs font-mono text-slate-400 mt-0.5">Internet Archive</div>
+                        <div class="text-[11px] text-slate-500 font-mono mt-1">Digital Library & Media</div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-slate-600 group-hover:text-amber-400 transition-colors"></i>
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ================= FOOTER (SPECIFIED IN SKETCH) ================= -->
+    <footer class="mt-10 pt-4 border-t border-slate-800/80 max-w-[1400px] mx-auto w-full flex flex-col sm:flex-row items-center justify-between gap-2 text-xs font-mono text-slate-500">
+        <!-- Left label from sketch -->
+        <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-blue-500/50"></span>
+            <span>PC Browser non-local web portal</span>
+        </div>
+
+        <!-- Right attribution from sketch -->
+        <div class="text-slate-400">
+            powered by <strong class="text-slate-200">citixenx.org</strong> through <i class="fa-brands fa-github text-slate-300"></i> GitHub
+        </div>
+    </footer>
+
+    <!-- DYNAMIC GREETING & LIVE WEATHER FETCH SCRIPT -->
+    <script>
+        function updateGreeting() {
+            const now = new Date();
+            const hours = now.getHours();
+            let greeting = "Good Morning";
+
+            if (hours >= 12 && hours < 18) {
+                greeting = "Good Afternoon";
+            } else if (hours >= 18 || hours < 5) {
+                greeting = "Good Evening";
+            }
+
+            document.getElementById('greeting-display').textContent = greeting;
+        }
+
+        async function fetchLiveWeather() {
+            // Lexington, KY Coordinates
+            const lat = 38.0464;
+            const lon = -84.4970;
+
+            try {
+                // Open-Meteo API (Open CORS, no API key required)
+                const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&hourly=relativehumidity_2m,precipitation_probability&daily=temperature_2m_max,temperature_2m_min&temperature_unit=fahrenheit&windspeed_unit=mph&timezone=America%2FNew_York`);
+                
+                if (!response.ok) throw new Error('Weather API unreachable');
+                
+                const data = await response.json();
+                const current = data.current_weather;
+                const daily = data.daily;
+                const hourly = data.hourly;
+
+                // Current Temperature
+                const temp = Math.round(current.temperature);
+                document.getElementById('weather-temp').textContent = `${temp}°F`;
+
+                // High / Low
+                const high = Math.round(daily.temperature_2m_max[0]);
+                const low = Math.round(daily.temperature_2m_min[0]);
+                document.getElementById('weather-high').textContent = `${high}°`;
+                document.getElementById('weather-low').textContent = `${low}°`;
+
+                // Humidity and Precip Probability (Current hour)
+                const currentHourIndex = new Date().getHours();
+                const humidity = hourly.relativehumidity_2m[currentHourIndex] || '--';
+                const precip = hourly.precipitation_probability[currentHourIndex] || 0;
+                document.getElementById('weather-humidity').textContent = `${humidity}%`;
+                document.getElementById('weather-precip').textContent = `${precip}%`;
+
+                // Weather Condition Code Translation
+                const code = current.weathercode;
+                const weatherInfo = getWeatherDescription(code);
+                document.getElementById('weather-desc').textContent = weatherInfo.desc;
+                
+                // Update Icon
+                const iconElement = document.getElementById('weather-main-icon');
+                iconElement.className = `fa-solid ${weatherInfo.icon} text-amber-400 text-4xl`;
+
+            } catch (error) {
+                console.error("Weather fetch failed:", error);
+                document.getElementById('weather-desc').textContent = "Lexington, KY";
+                document.getElementById('weather-source').textContent = "Offline";
+            }
+        }
+
+        function getWeatherDescription(code) {
+            // WMO Weather interpretation codes
+            if (code === 0) return { desc: 'Clear Sky', icon: 'fa-sun' };
+            if (code >= 1 && code <= 3) return { desc: 'Partly Cloudy', icon: 'fa-cloud-sun' };
+            if (code >= 45 && code <= 48) return { desc: 'Foggy', icon: 'fa-smog' };
+            if (code >= 51 && code <= 67) return { desc: 'Rainy', icon: 'fa-cloud-rain' };
+            if (code >= 71 && code <= 77) return { desc: 'Snowy', icon: 'fa-snowflake' };
+            if (code >= 80 && code <= 82) return { desc: 'Showers', icon: 'fa-cloud-showers-heavy' };
+            if (code >= 95) return { desc: 'Thunderstorm', icon: 'fa-cloud-bolt' };
+            return { desc: 'Lexington, KY', icon: 'fa-sun' };
+        }
+
+        updateGreeting();
+        fetchLiveWeather();
+    </script>
+</body>
+</html>
