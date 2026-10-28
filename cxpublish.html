@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CitixenX Publishing | Independent Author Representation & Industry Bridge</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            bg: '#0f0f10',
+                            surface: '#18181b',
+                            surfaceHover: '#222226',
+                            border: '#2e2e33',
+                            gold: '#c59b27',
+                            goldLight: '#e6c265',
+                            cream: '#f4f4f0',
+                            muted: '#9a9a9f'
+                        }
+                    },
+                    fontFamily: {
+                        cinzel: ['Cinzel', 'serif'],
+                        serif: ['Playfair Display', 'Georgia', 'serif'],
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0f0f10;
+            color: #f4f4f0;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #f3e5ab 0%, #c59b27 50%, #997415 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gold-border-glow:focus-within {
+            box-shadow: 0 0 15px rgba(197, 155, 39, 0.25);
+            border-color: #c59b27;
+        }
+
+        .glass-card {
+            background: rgba(24, 24, 27, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(197, 155, 39, 0.4);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f0f10;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2e2e33;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #c59b27;
+        }
+
+        .author-card-img {
+            filter: grayscale(80%) contrast(105%);
+            transition: all 0.5s ease;
+        }
+
+        .author-card:hover .author-card-img {
+            filter: grayscale(0%) contrast(100%);
+            transform: scale(1.03);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-gold selection:text-brand-bg">
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-3 pointer-events-none"></div>
+
+    <!-- Navigation -->
+    <header class="fixed top-0 left-0 w-full z-40 bg-brand-bg/90 backdrop-blur-md border-b border-brand-border/60 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded border border-brand-gold/60 flex items-center justify-center bg-brand-surface group-hover:border-brand-gold transition-colors">
+                    <span class="font-cinzel font-bold text-xl text-brand-gold">CX</span>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-cinzel font-bold tracking-wider text-lg text-brand-cream leading-tight">CITIXEN<span class="text-brand-gold">X</span></span>
+                    <span class="text-[10px] tracking-[0.25em] text-brand-muted uppercase">Publishing Agency</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium tracking-wide uppercase text-brand-muted">
+                <a href="#about" class="hover:text-brand-gold transition-colors">About Us</a>
+                <a href="#network" class="hover:text-brand-gold transition-colors">Industry Network</a>
+                <a href="#roster" class="hover:text-brand-gold transition-colors">Author Roster</a>
+                <a href="#services" class="hover:text-brand-gold transition-colors">Representation</a>
+                <a href="#submissions" class="hover:text-brand-gold transition-colors">Submissions</a>
+            </nav>
+
+            <!-- Header Action Button -->
+            <div class="hidden md:flex items-center space-x-4">
+                <a href="#submissions" class="px-5 py-2.5 text-xs font-semibold uppercase tracking-widest bg-brand-gold text-brand-bg rounded hover:bg-brand-goldLight transition-all duration-300 shadow-lg shadow-brand-gold/10">
+                    Submit Query
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="mobile-menu-btn" class="md:hidden text-brand-cream hover:text-brand-gold p-2 focus:outline-none" aria-label="Toggle Navigation">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-surface border-b border-brand-border px-6 py-6 space-y-4">
+            <a href="#about" class="block text-brand-cream hover:text-brand-gold py-1 uppercase text-sm tracking-wider">About Us</a>
+            <a href="#network" class="block text-brand-cream hover:text-brand-gold py-1 uppercase text-sm tracking-wider">Industry Network</a>
+            <a href="#roster" class="block text-brand-cream hover:text-brand-gold py-1 uppercase text-sm tracking-wider">Author Roster</a>
+            <a href="#services" class="block text-brand-cream hover:text-brand-gold py-1 uppercase text-sm tracking-wider">Representation</a>
+            <a href="#submissions" class="block text-brand-cream hover:text-brand-gold py-1 uppercase text-sm tracking-wider">Submissions</a>
+            <div class="pt-4 border-t border-brand-border">
+                <a href="#submissions" class="block w-full text-center py-3 bg-brand-gold text-brand-bg font-semibold uppercase text-xs tracking-widest rounded">
+                    Submit Query
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen pt-32 pb-20 flex items-center justify-center overflow-hidden">
+        <!-- Background Ambient Glow -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-gold/5 rounded-full blur-[140px] pointer-events-none"></div>
+        <div class="absolute top-1/3 right-10 w-80 h-80 bg-amber-600/5 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            
+            <!-- Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-gold/30 bg-brand-surface/80 text-brand-gold text-xs uppercase tracking-widest mb-8">
+                <span class="w-1.5 h-1.5 rounded-full bg-brand-gold animate-pulse"></span>
+                Bridge Between Indie Talent & Legacy Publishing
+            </div>
+
+            <!-- Headline -->
+            <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-brand-cream tracking-tight leading-[1.1] mb-8">
+                Elevating Visionary Voices To <span class="gold-gradient-text italic font-normal">Global Platforms</span>
+            </h1>
+
+            <!-- Subheading -->
+            <p class="max-w-3xl mx-auto text-lg sm:text-xl text-brand-muted font-light leading-relaxed mb-10">
+                CitixenX Publishing bridges the gap between independent literary genius and major industry networks. We leverage years of direct relationships to champion bold voices, secure lucrative deals, and execute impactful distribution strategies.
+            </p>
+
+            <!-- Call to Action Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+                <a href="#submissions" class="w-full sm:w-auto px-8 py-4 bg-brand-gold text-brand-bg font-semibold text-xs uppercase tracking-[0.2em] rounded hover:bg-brand-goldLight transition-all duration-300 shadow-xl shadow-brand-gold/10 flex items-center justify-center gap-3">
+                    Seek Representation <i class="fa-solid fa-arrow-right text-xs"></i>
+                </a>
+                <a href="#roster" class="w-full sm:w-auto px-8 py-4 border border-brand-border hover:border-brand-gold text-brand-cream font-semibold text-xs uppercase tracking-[0.2em] rounded hover:bg-brand-surface transition-all duration-300 flex items-center justify-center">
+                    Explore Author Roster
+                </a>
+            </div>
+
+            <!-- Key Metric Highlights -->
+            <div class="mt-20 pt-10 border-t border-brand-border/40 grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <p class="font-cinzel text-3xl sm:text-4xl font-bold text-brand-gold">100%</p>
+                    <p class="text-xs uppercase tracking-widest text-brand-muted mt-1">Independent Focus</p>
+                </div>
+                <div class="text-center">
+                    <p class="font-cinzel text-3xl sm:text-4xl font-bold text-brand-gold">40+</p>
+                    <p class="text-xs uppercase tracking-widest text-brand-muted mt-1">Media Contacts</p>
+                </div>
+                <div class="text-center">
+                    <p class="font-cinzel text-3xl sm:text-4xl font-bold text-brand-gold">Global</p>
+                    <p class="text-xs uppercase tracking-widest text-brand-muted mt-1">Distribution Reach</p>
+                </div>
+                <div class="text-center">
+                    <p class="font-cinzel text-3xl sm:text-4xl font-bold text-brand-gold">Bespoke</p>
+                    <p class="text-xs uppercase tracking-widest text-brand-muted mt-1">Author Strategy</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Mission & Approach -->
+    <section id="about" class="py-24 bg-brand-surface/40 border-y border-brand-border/40 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="text-brand-gold uppercase text-xs tracking-[0.3em] font-semibold block">The CitixenX Paradigm</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
+                        We Don't Just Represent. <br/><span class="italic font-normal text-brand-gold">We Connect & Scale.</span>
+                    </h2>
+                    <p class="text-brand-muted leading-relaxed text-sm sm:text-base">
+                        The traditional publishing landscape often forces authors to choose between creative freedom and commercial scale. At CitixenX Publishing, we eradicate that boundary.
+                    </p>
+                    <p class="text-brand-muted leading-relaxed text-sm sm:text-base">
+                        By working directly with renowned creators like <strong>Ashtin Birkicht</strong>, <strong>Callie Lynn Nelson</strong>, and <strong>Angela Conway</strong>, we build custom representation pipelines tailored to each author's distinct narrative voice.
+                    </p>
+                    <div class="pt-2">
+<!-- ... existing code -->
+            <!-- Author Cards Grid -->
+            <div id="author-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Author 1: Ashtin Birkicht -->
+                <div class="author-card glass-card rounded-lg overflow-hidden flex flex-col transition-all duration-300" data-category="featured fiction">
+                    <div class="relative h-72 overflow-hidden bg-brand-surface">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80" alt="Ashtin Birkicht" class="w-full h-full object-cover author-card-img" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-surface via-transparent to-transparent"></div>
+                        <span class="absolute top-4 right-4 bg-brand-gold text-brand-bg text-[10px] uppercase font-bold tracking-widest px-2.5 py-1 rounded">
+                            Bestselling Author
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-serif text-xl font-bold text-brand-cream mb-1">Ashtin Birkicht</h3>
+                            <p class="text-xs text-brand-gold uppercase tracking-wider font-medium mb-3">Contemporary Memoir & Poetry</p>
+                            <p class="text-xs text-brand-muted leading-relaxed mb-4 line-clamp-3">
+                                Explores raw emotional landscapes, resilience, and personal transformation through compelling narrative prose.
+                            </p>
+                            
+                            <!-- Highlighted Titles -->
+                            <div class="space-y-2 mb-6">
+                                <div class="p-2.5 rounded bg-brand-bg/80 border border-brand-border/60 flex items-start gap-2.5">
+                                    <i class="fa-solid fa-book text-brand-gold text-xs mt-1"></i>
+                                    <div>
+                                        <p class="text-xs font-semibold text-brand-cream">A Depression Episode</p>
+                                        <p class="text-[10px] text-brand-muted">Acclaimed Memoir / Literary</p>
+                                    </div>
+                                </div>
+                                <div class="p-2.5 rounded bg-brand-bg/80 border border-brand-border/60 flex items-start gap-2.5">
+                                    <i class="fa-solid fa-book text-brand-gold text-xs mt-1"></i>
+                                    <div>
+                                        <p class="text-xs font-semibold text-brand-cream">Heart Break Makes Great Art</p>
+                                        <p class="text-[10px] text-brand-muted">Poetry & Reflection Collection</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button onclick="openAuthorModal('ashtin')" class="w-full py-2.5 border border-brand-gold/40 text-brand-gold hover:bg-brand-gold hover:text-brand-bg text-xs font-semibold uppercase tracking-widest rounded transition-all">
+                            View Full Profile
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Author 2: Callie Lynn Nelson -->
+                <div class="author-card glass-card rounded-lg overflow-hidden flex flex-col transition-all duration-300" data-category="featured fiction">
+                    <div class="relative h-72 overflow-hidden bg-brand-surface">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80" alt="Callie Lynn Nelson" class="w-full h-full object-cover author-card-img" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-surface via-transparent to-transparent"></div>
+                        <span class="absolute top-4 right-4 bg-brand-surface/90 border border-brand-gold/40 text-brand-gold text-[10px] uppercase font-bold tracking-widest px-2.5 py-1 rounded">
+                            Represented
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-serif text-xl font-bold text-brand-cream mb-1">Callie Lynn Nelson</h3>
+                            <p class="text-xs text-brand-gold uppercase tracking-wider font-medium mb-3">Literary Fiction & Suspense</p>
+                            <p class="text-xs text-brand-muted leading-relaxed mb-4 line-clamp-3">
+                                Known for intricately woven character studies and high-tension psychological narratives that captivate readers.
+                            </p>
+
+                            <div class="space-y-2 mb-6">
+                                <div class="p-2.5 rounded bg-brand-bg/80 border border-brand-border/60 flex items-start gap-2.5">
+                                    <i class="fa-solid fa-book text-brand-gold text-xs mt-1"></i>
+                                    <div>
+                                        <p class="text-xs font-semibold text-brand-cream">Shadows Over The Horizon</p>
+                                        <p class="text-[10px] text-brand-muted">Fiction / Psychological</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button onclick="openAuthorModal('callie')" class="w-full py-2.5 border border-brand-gold/40 text-brand-gold hover:bg-brand-gold hover:text-brand-bg text-xs font-semibold uppercase tracking-widest rounded transition-all">
+                            View Full Profile
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Author 3: Angela Conway -->
+                <div class="author-card glass-card rounded-lg overflow-hidden flex flex-col transition-all duration-300" data-category="fiction">
+                    <div class="relative h-72 overflow-hidden bg-brand-surface">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80" alt="Angela Conway" class="w-full h-full object-cover author-card-img" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-surface via-transparent to-transparent"></div>
+                        <span class="absolute top-4 right-4 bg-brand-surface/90 border border-brand-gold/40 text-brand-gold text-[10px] uppercase font-bold tracking-widest px-2.5 py-1 rounded">
+                            Represented
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-serif text-xl font-bold text-brand-cream mb-1">Angela Conway</h3>
+                            <p class="text-xs text-brand-gold uppercase tracking-wider font-medium mb-3">Historical Fiction & Memoir</p>
+                            <p class="text-xs text-brand-muted leading-relaxed mb-4 line-clamp-3">
+                                Crafting deeply resonant narrative threads rooted in history, human resilience, and intricate family legacies.
+                            </p>
+
+                            <div class="space-y-2 mb-6">
+                                <div class="p-2.5 rounded bg-brand-bg/80 border border-brand-border/60 flex items-start gap-2.5">
+                                    <i class="fa-solid fa-book text-brand-gold text-xs mt-1"></i>
+                                    <div>
+                                        <p class="text-xs font-semibold text-brand-cream">Echoes of Yesterday</p>
+                                        <p class="text-[10px] text-brand-muted">Historical Drama</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button onclick="openAuthorModal('angela')" class="w-full py-2.5 border border-brand-gold/40 text-brand-gold hover:bg-brand-gold hover:text-brand-bg text-xs font-semibold uppercase tracking-widest rounded transition-all">
+                            View Full Profile
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+<!-- ... existing code -->
+        // Modal Author Data
+        const authorData = {
+            ashtin: {
+                name: "Ashtin Birkicht",
+                genre: "Contemporary Memoir & Modern Poetry",
+                bio: "Ashtin Birkicht is an acclaimed author whose powerful prose explores the deep nuances of human vulnerability, mental health, emotional endurance, and creative rebirth. Represented by CitixenX Publishing, Birkicht's works connect profoundly with modern readers across digital and print formats.",
+                books: [
+                    { title: "A Depression Episode", description: "A raw, unfiltered exploration of navigating dark personal terrain and finding clarity through literary expression." },
+                    { title: "Heart Break Makes Great Art", description: "A celebrated collection connecting grief, healing, and the artistic synthesis of pain into resonance." }
+                ],
+                status: "Represented Author - CitixenX Publishing"
+            },
+            callie: {
+                name: "Callie Lynn Nelson",
+                genre: "Literary Fiction & Psychological Suspense",
+                bio: "Callie Lynn Nelson crafts compelling character stories defined by tense atmospheres and subtle emotional twists. Working with CitixenX Publishing, Nelson's manuscript projects are positioned with top-tier trade editors and adaptation scouts.",
+                books: [
+                    { title: "Shadows Over The Horizon", description: "A suspenseful drama dissecting secrets, small-town dynamics, and psychological redemption." }
+                ],
+                status: "Represented Author - CitixenX Publishing"
+            },
+            angela: {
+                name: "Angela Conway",
+                genre: "Historical Fiction & Multi-Generational Memoir",
+                bio: "Angela Conway weaves intricate historical tapestries and personal histories that resonate across generations. Represented by CitixenX Publishing, Conway brings timeless storytelling to modern audiences.",
+                books: [
+                    { title: "Echoes of Yesterday", description: "An extraordinary saga detailing family resilience through changing eras of history." }
+                ],
+                status: "Represented Author - CitixenX Publishing"
+            }
+        };
+
+        function openAuthorModal(key) {
+<!-- ... existing code -->
